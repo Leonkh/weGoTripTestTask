@@ -19,11 +19,11 @@ final class MainViewDIAssembly: Assembly {
         }
         
         container.register(MainRouter.self) { resolver in
-            guard let assembly = resolver.resolve(ReviewCreationViewAssembly.self) else {
+            guard let provider = resolver.resolve(Provider<ReviewCreationViewAssembly>.self) else {
                 fatalError()
             }
             
-            return MainRouterImpl(reviewCreationViewAssembly: assembly) }
+            return MainRouterImpl(reviewCreationViewAssemblyProvider: provider) }
             .initCompleted { resover, router in
                 guard let router = router as? MainRouterImpl else {
                     fatalError()

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Swinject
 
 protocol MainRouter {
     
@@ -20,10 +21,10 @@ final class MainRouterImpl {
     
     weak var view: MainView?
     
-    private let reviewCreationViewAssembly: ReviewCreationViewAssembly
+    private let reviewCreationViewAssemblyProvider: Provider<ReviewCreationViewAssembly>
     
-    init(reviewCreationViewAssembly: ReviewCreationViewAssembly) {
-        self.reviewCreationViewAssembly = reviewCreationViewAssembly
+    init(reviewCreationViewAssemblyProvider: Provider<ReviewCreationViewAssembly>) {
+        self.reviewCreationViewAssemblyProvider = reviewCreationViewAssemblyProvider
     }
     
 }
@@ -33,7 +34,7 @@ extension MainRouterImpl: MainRouter {
     // MARK: - MainRouter
     
     func presentReviewCreation() {
-        let viewController = reviewCreationViewAssembly.createView()
+        let viewController = reviewCreationViewAssemblyProvider.instance.createView()
         view?.present(viewController, animated: true)
     }
     

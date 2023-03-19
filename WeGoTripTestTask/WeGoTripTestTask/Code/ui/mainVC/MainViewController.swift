@@ -27,7 +27,7 @@ final class MainViewController: UIViewController {
     
     private lazy var createReviewButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Create review",
+        button.setTitle("Write a review",
                         for: .normal)
         button.setTitleColor(Constants.createReviewButtonTextColor,
                              for: .normal)
@@ -35,7 +35,6 @@ final class MainViewController: UIViewController {
                          for: .touchUpInside)
         button.setBackgroundImage(UIImage.from(color: Constants.createReviewButtonBackgroundColor),
                                   for: .normal)
-        button.makeRoundCorners(.all, radius: Constants.createReviewButtonHeight / 2)
         return button
     }()
     private let presenter: MainPresenter
@@ -61,6 +60,14 @@ final class MainViewController: UIViewController {
         
         view.backgroundColor = Constants.backgroundColor
         setupLayout()
+        presenter.viewDidLoad()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        createReviewButton.roundCorners(.allCorners,
+                                        radius: Constants.createReviewButtonHeight / 2)
     }
     
     // MARK: - Private methods

@@ -11,6 +11,8 @@ protocol MainPresenter {
     
     func didTapCreateReviewButton()
     
+    func viewDidLoad()
+    
 }
 
 final class MainPresenterImpl {
@@ -34,6 +36,10 @@ extension MainPresenterImpl: MainPresenter {
     
     func didTapCreateReviewButton() {
         router.presentReviewCreation()
+    }
+    
+    func viewDidLoad() {
+        didTapCreateReviewButton()
     }
     
 }
